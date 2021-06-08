@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html style="background-color: #EEE;">
+	<head>
+		<meta charset="UTF-8">
+		<title>PWscf k-point Parser</title>
+        <link rel="stylesheet" type="text/css" href="./res/index.css">
+        <link rel="stylesheet" type="text/css" href="./res/fonts.css">
+	</head>
+	<body>
+		<span id="kPointParser">
+			<div class="card" style="background-color: #FFF0; padding: 0;">
+				<span class="title" style="font-size: 1.6em; font-weight: 400; margin: 0;">PWscf XML Processor and Band Structure Plotter</span>
+			</div>
+			<div class="card dialog">
+				<span class="title">Select a file</span>
+				<span style="flex-grow: 1; text-align: right; line-height: 100%; margin: 0;">
+					<span id="input_filename" style="padding: 0 0.5em; color: #666; display: flex; flex-grow: 1; justify-content: right; text-overflow: ellipsis;">{{fileName || "Use this button to select a local file &#8594;"}}</span>
+					<div class="button" onclick="app.clear(); getFile()">select</div>
+				</span>
+			</div>
+			<div class="card dialog">
+				<span class="title">Define Fermi Energy</span>
+				<span style="flex-grow: 1; text-align: right; line-height: 100%; margin: 0;">
+					<span id="fermi_energy_input" style="padding: 0; margin-right: 0.2em; color: #666; display: flex; flex-grow: 1; justify-content: right; text-overflow: ellipsis;" contenteditable="true">0</span>
+					<span style="padding: 0; padding-right: 0.5em; margin-left: 0; color: #666; display: flex; flex: unset; text-align: left; justify-content: left;">eV</span>
+					<div class="button" onclick="var Fermi_Input = document.getElementById('fermi_energy_input').innerText; checkInput(Fermi_Input) && makePlot(parseFloat(Fermi_Input));">plot</div>
+				</span>
+			</div>
+			<div class="card" v-if="k_points && Object.keys(k_points).length">
+				<span class="title">Captured k-points list</span>
+				<div style="height: 0.1rem; background-color: #555;"></div>
+				<span class="k_title" style="--w: calc((100% - 25rem) / 3); font-weight: 500;">
+					<span class="id" style="width: 2em;">ID</span>
+					<span class="data" style="width: 6rem;">npw</span>
+					<span class="data" style="width: 6rem;">weight</span>
+					<span class="data" style="width: 6rem;">dist.</span>
+					<span class="data" style="width: var(--w);">kx</span>
+					<span class="data" style="width: var(--w);">ky</span>
+					<span class="data" style="width: var(--w);">kz</span>
+					<span class="data" style="width: 3rem;"></span>
+				</span>
+				<span class="k_entry" style="--w: calc((100% - 25rem) / 3);" v-for="(p, i) in k_points">
+					<span class="id" style="width: 2rem; color: #666;" v-on:click="prompt_for_mark(i)" v-if="p.mark === ''">{{p.mark||i}}</span>
+					<span class="id marked" style="width: 2rem; font-family: 'Times New Roman', Times, serif;" v-on:click="prompt_for_mark(i)" v-if="p.mark !== ''">{{p.mark||i}}</span>
+					<span class="data" style="width: 6rem;">{{p.npw||i}}</span>
+					<span class="data" style="width: 6rem;">{{p.k_point.weight}}</span>
+					<span class="data" style="width: 6rem;">{{'' + p.dist || 'N/A'}}</span>
+					<span class="data" style="width: var(--w);">{{p.k_point.coords[0]}}</span>
+					<span class="data" style="width: var(--w);">{{p.k_point.coords[1]}}</span>
+					<span class="data" style="width: var(--w);">{{p.k_point.coords[2]}}</span>
+					<span class="data" style="width: 3rem; user-select: none; cursor: pointer; text-decoration: underline;" v-on:click="show_data(i)">data</span>
+				</span>
+			</div>
+			<div class="dialog_background" v-show="dialog.Bands">
+				<canvas id="Bands" style="height: 80vh; top: 10vh; width: 80vw; left: 10vw; background-color: #FFF;"></canvas>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 376.98 376.98" style="left: 92vw; bottom: 92vh; width: 2vh; height: 2vh;" v-on:click="dialog.Bands = false;">
+					<g><path class="SVG_Cross" style="background-color: #FFF;" d="M245.06,188.49,365.27,68.28A40,40,0,1,0,308.7,11.72L188.49,131.92,68.28,11.72A40,40,0,0,0,11.72,68.28l120.2,120.21L11.72,308.7a40,40,0,1,0,56.56,56.57L188.49,245.06,308.7,365.27a40,40,0,1,0,56.57-56.57Z"/></g>
+				</svg>
+				<div class="card" style="background-color: #FFF0; height: 10vh; bottom: 0; width: 80vw; left: 10vw; padding: 0; text-align: center; justify-content: center; vertical-align: center;" contenteditable="false">
+					<span style="display: inline-block; border-radius: 0.2em; color: #FFF;">Lower band No.</span>
+					<span id="Band_lo" style="padding: 0; display: inline-block; margin-left: 0.1em; color: #FFF;" contenteditable="true" onblur="check_band_limits()">{{Bands.low.toString()}}</span>
+					<span style="display: inline-block; border-radius: 0.2em; color: #FFF;">Higher band No.</span>
+					<span id="Band_hi" style="padding: 0; display: inline-block; margin-left: 0.1em; color: #FFF;" contenteditable="true" onblur="check_band_limits()">{{Bands.high.toString()}}</span>
+					<div class="button" style="display: inline-block;" onclick="plot.fitViewport()">Reset View</div>
+					<div class="button" style="display: inline-block;" onclick="alert('Not implemented')">Export Figure</div>
+				</div>
+			</div>
+			<div class="card" style="background-color: #FFF0; padding: 0; text-align: center; justify-content: center;" v-if="k_points && Object.keys(k_points).length">
+				<div class="button" style="display: inline-block; margin: 0 0.5em; padding: 0.3em 0.5em;" onclick="">Export Data as JSON</div>
+				<div class="button" style="display: inline-block; margin: 0 0.5em; padding: 0.3em 0.5em;" onclick="">Export Data as CSV</div>
+			</div>
+			<div class="card" style="background-color: #FFF0; padding: 0; text-align: center; justify-content: center; color: gray; font-size: 0.8em;">
+				<span style="display: block; margin: 0; padding: 0; font-size: inherit;">Application composed by Yuxuan Zhang at Xian Jiao Tong University. Contact: <a href = "mailto: yuxuan@yuxuanzhang.net" style="font-size: inherit; color: inherit; font-family: inherit;">Yuxuan@yuxuanzhang.net</a></span>
+				<span style="display: block; margin: 0; padding: 0; font-size: inherit;">This project is distributed under MIT Licence, and is therefore free to use, modify and redistribute.</span>
+				<!-- <span style="display: block; margin: 0; padding: 0; font-size: inherit;">Please feel free to contact the author if you have encountered with faulty results or have a new feature request.</span> -->
+				<span style="display: block; margin: 0; padding: 0; font-size: inherit;">June 2021</span>
+			</div>
+		</span>
+		<!------------------------------- PlotJS ------------------------------->
+        <script>
+			window.PlotJS = {
+				API: {},
+				GRAPHICS: {},
+				UTILITY: {},
+				util: {}
+			};
+		</script>
+		<script src="./PlotJS/Plot.util.js"></script>
+		<script src="./PlotJS/Plot.default.config.js"></script>
+		<script src="./PlotJS/Plot.default.theme.js"></script>
+		<script src="./PlotJS/Plot.default.viewport.js"></script>
+		<script src="./PlotJS/Plot.default.data.js"></script>
+		<script src="./PlotJS/Plot.interactions.js"></script>
+		<script src="./PlotJS/Plot.js"></script>
+		<script src="./PlotJS/Plot.API.js"></script>
+		<script src="./PlotJS/Plot.GRAPHICS.js"></script>
+		<script src="./PlotJS/Plot.UTILITY.js"></script>
+		<!----------------------------- Main Logic ----------------------------->
+        <script src="./vue.js"></script>
+		<script src="./util.js"></script>
+		<script src="./app.js"></script>
+	</body>
+</html>

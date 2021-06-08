@@ -1,0 +1,253 @@
+/* Microsoft vscode icons, distributed under MIT license */
+@import "./codeicon/codicon.css";
+
+/*---------------------------------------------------------------------
+---------------------------------
+|Fontweight	|Value	|Comment	|
+|-----------|-------|-----------|
+|ExtraLight	|100	|optional	|
+|Light		|200	|			|
+|Normal		|300	|			|
+|Heavy		|400	|			|
+|Bold		|500	|			|
+|ExtraBold	|600	|optional	|
+---------------------------------
+---------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------
+	Defines the primary font used in this style sheet
+---------------------------------------------------------------------*/
+@font-face {
+	font-family:'Primary';
+	src: url('OpenSans/200.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Primary';
+	src: url('OpenSans/200i.ttf') format('truetype');
+	font-weight: 200;
+	font-style: italic;
+}
+@font-face {
+	font-family:'Primary';
+	src: url('OpenSans/300.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Primary';
+	src: url('OpenSans/300i.ttf') format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+@font-face {
+	font-family:'Primary';
+	src: url('OpenSans/400.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Primary';
+	src: url('OpenSans/400i.ttf') format('truetype');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family:'Primary';
+	src: url('OpenSans/500.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Primary';
+	src: url('OpenSans/500i.ttf') format('truetype');
+	font-weight: 500;
+	font-style: italic;
+}
+@font-face {
+	font-family:'Primary';
+	src: url('OpenSans/600.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Primary';
+	src: url('OpenSans/600i.ttf') format('truetype');
+	font-weight: 600;
+	font-style: italic;
+}
+
+/*---------------------------------------------------------------------
+	Defines the secondary font used in this style sheet
+---------------------------------------------------------------------*/
+/*
+@font-face {
+	font-family:'Secondary';
+	src: url('Merriweather/200.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Secondary';
+	src: url('Merriweather/200i.ttf') format('truetype');
+	font-weight: 200;
+	font-style: italic;
+}
+@font-face {
+	font-family:'Secondary';
+	src: url('Merriweather/300.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Secondary';
+	src: url('Merriweather/300i.ttf') format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+@font-face {
+	font-family:'Secondary';
+	src: url('Merriweather/400.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Secondary';
+	src: url('Merriweather/400i.ttf') format('truetype');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family:'Secondary';
+	src: url('Merriweather/500.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Secondary';
+	src: url('Merriweather/500i.ttf') format('truetype');
+	font-weight: 500;
+	font-style: italic;
+}
+*/
+/*
+@font-face {
+	font-family:'Secondary';
+	src: url('Merriweather/600.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Secondary';
+	src: url('Merriweather/600i.ttf') format('truetype');
+	font-weight: 600;
+	font-style: italic;
+}
+*/
+
+/*---------------------------------------------------------------------
+	Defines special fonts used in this style sheet
+---------------------------------------------------------------------*/
+
+@font-face {
+	font-family:'Ubuntu';
+	src: url('Ubuntu/200.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Ubuntu';
+	src: url('Ubuntu/200i.ttf') format('truetype');
+	font-weight: 200;
+	font-style: italic;
+}
+@font-face {
+	font-family:'Ubuntu';
+	src: url('Merriweather/300.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Ubuntu';
+	src: url('Merriweather/300i.ttf') format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+@font-face {
+	font-family:'Ubuntu';
+	src: url('Ubuntu/400.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Ubuntu';
+	src: url('Ubuntu/400i.ttf') format('truetype');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family:'Ubuntu';
+	src: url('Ubuntu/500.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Ubuntu';
+	src: url('Ubuntu/500i.ttf') format('truetype');
+	font-weight: 500;
+	font-style: italic;
+}
+
+@font-face {
+	font-family:'Roboto-100';
+	src: url('Special/Roboto-100.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family:'Roboto-200';
+	src: url('Special/Roboto-200.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*---------------------------------------------------------------------
+	Defines default fonts
+---------------------------------------------------------------------*/
+
+.font_thin{
+	font-family: 'Primary';
+	font-weight: 200;
+	font-style: normal;
+}
+
+.font_light{
+	font-family: 'Primary';
+	font-weight: 200;
+	font-style: normal;
+}
+
+.font_regular{
+	font-family: 'Primary';
+	font-weight: 300;
+	font-style: normal;
+}
+
+.font_medium{
+	font-family: 'Primary';
+	font-weight: 400;
+	font-style: normal;
+}
+
+.font_bold{
+	font-family: 'Primary';
+	font-weight: 500;
+	font-style: normal;
+}
+
+.font_black{
+	font-family: 'Primary';
+	font-weight: 600;
+	font-style: normal;
+}

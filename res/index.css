@@ -1,0 +1,116 @@
+* {
+  font-family: "Avenir Next", "Avenir", Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+span.title {
+  font-weight: 500;
+  flex-wrap: nowrap;
+}
+div.card {
+  vertical-align: text-bottom;
+  padding: 1em;
+  margin: 2em auto;
+  width: 80vw;
+  max-width: 1200px;
+  background-color: #fff;
+}
+div.card * {
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  vertical-align: text-bottom;
+  margin: 0.5em;
+}
+div.dialog {
+  display: flex;
+}
+div.dialog * {
+  display: flex;
+}
+
+div.button {
+  user-select: none;
+  flex: unset !important;
+  cursor: pointer;
+  display: inline-block;
+  margin: auto;
+  border-radius: 0.3em;
+  padding: 0.2em 0.5em;
+  background-color: #263087;
+  color: #fff;
+}
+div.button:hover {
+  background-color: #4855cb;
+}
+div.button:active {
+  background-color: #313eaf;
+}
+
+div.button.outlined {
+  background-color: transparent;
+  border: 1px solid #262f88;
+  color: #262f88;
+}
+
+.card .k_entry,
+.card .k_title {
+  display: block;
+  font-size: 0.9rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0.2rem 0;
+  /* line-height: 1em; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  justify-content: center;
+}
+.card .k_entry .id {
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+.card .k_entry .id:hover {
+  background-color: #eeeeee;
+}
+.card .k_entry .id:active {
+  background-color: #fafafa;
+}
+.card .k_entry .id.marked {
+  color: #fff;
+  font-weight: 500;
+  background-color: #262f88;
+}
+.card .k_entry .id.marked:hover {
+  background-color: #4855cb;
+}
+.card .k_entry .id.marked:active {
+  background-color: #313eaf;
+}
+.card .k_entry > *,
+.card .k_title > * {
+  display: inline-block;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  justify-content: center;
+  padding: 0.2rem 0.2rem;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.dialog_background{
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background-color: #000A;
+	-webkit-backdrop-filter: blur(5px);
+	backdrop-filter: blur(5px);
+}
+.dialog_background > *{
+	position: absolute;
+	margin: 0 !important;
+}
